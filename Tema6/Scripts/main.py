@@ -42,7 +42,7 @@ def get_x_i(polynomial, x, bonus=False):
     horner_polynomial_second_derivative = horner_method(second_derivative(polynomial), x)
 
     Q = 1
-    if not bonus:
+    if bonus:
         Q = fractions.gcd(horner_polynomial, horner_polynomial_first_derivative)
 
     A = 2 * (horner_polynomial_first_derivative ** 2) - ((horner_polynomial / Q) * horner_polynomial_second_derivative)
