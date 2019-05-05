@@ -1,5 +1,9 @@
 import tkinter
 
+__authors__ = ["Mihaila Alexandra Ioana", "Dupu Robert-Daniel"]
+__version__ = "1.0"
+__status__ = "Dev"
+
 
 def solve_u():
     u = 0.1

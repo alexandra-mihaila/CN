@@ -1,3 +1,8 @@
+__author__ = "Dupu Robert-Daniel"
+__version__ = "1.0"
+__status__ = "Dev"
+
+
 def citire(filename):
     with open(filename, 'r') as f:
         n = int(f.readline())
@@ -101,20 +106,20 @@ def inmultesteMatrici(a, b):
 
 def start():
     # adunare
-    a = citire('a.txt')[0]
-    b = citire('b.txt')[0]
-    aplusb = citire('aplusb.txt')[0]
+    a = citire('../Utils/a.txt')[0]
+    b = citire('../Utils/b.txt')[0]
+    aplusb = citire('../Utils/aplusb.txt')[0]
     a = aduna(a, b)
     print("[i] A + B = AplusB: {}".format(egale(a, aplusb)))
 
     # inmultireVector
-    a, b = citire('a.txt')
+    a, b = citire('../Utils/a.txt')
     print("[i] A * x = AoriX: {}".format(testInmultesteVector(a, b)))
 
     # inmultireMatrice
-    a = citire('a.txt')[0]
-    b = citire('b.txt')[0]
-    aorib = citire('aorib.txt')[0]
+    a = citire('../Utils/a.txt')[0]
+    b = citire('../Utils/b.txt')[0]
+    aorib = citire('../Utils/aorib.txt')[0]
     a = inmultesteMatrici(a, b)
     print("[i] A * B = AoriB: {}".format(egale(a, aorib)))
 

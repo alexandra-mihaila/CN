@@ -1,3 +1,11 @@
+import os
+
+
+__author__ = "Dupu Robert-Daniel"
+__version__ = "1.1"
+__status__ = "Dev"
+
+
 def citire(filename):
     with open(filename, 'r') as f:
         n = int(f.readline())
@@ -16,11 +24,11 @@ def citire(filename):
                             nuExista = False
                             break
                     if nuExista:
-                        A[i].append([val,j])
+                        A[i].append([val, j])
                 else:
                     b.append(val)
 
-    return A,b
+    return A, b
 
 
 def diagonalaNenula(A):
@@ -37,7 +45,7 @@ def diagonalaNenula(A):
     return True
 
 
-def inmultesteVector(A,x):
+def inmultesteVector(A, x):
     vec = []
     for i in range(len(A)):
         sum = 0
@@ -50,7 +58,7 @@ def inmultesteVector(A,x):
 def obtineComponente(A):
     n = len(A)
 
-    #D = diagonala  L = trunghiul inferior U = triunghiul superior
+    # D = diagonala  L = trunghiul inferior U = triunghiul superior
     D = []
     L = []
     U = []
@@ -61,15 +69,15 @@ def obtineComponente(A):
             if A[i][l][1] == i:
                 D.append([A[i][l][0]])
             elif A[i][l][1] < i:
-                lineL.append([A[i][l][0],A[i][l][1]])
+                lineL.append([A[i][l][0], A[i][l][1]])
             else:
-                lineU.append([A[i][l][0],A[i][l][1]])
+                lineU.append([A[i][l][0], A[i][l][1]])
         L.append(lineL)
         U.append(lineU)
     return D, L, U
 
 
-def sumOriVal(v,x):
+def sumOriVal(v, x):
     sum = 0
     for i in range(len(v)):
         sum += (v[i][0] * x[v[i][1]])
@@ -81,23 +89,23 @@ def vectoriEgali(v1, v2):
         return False
 
     esp = 1e-7
-    for  i in range(len(v1)):
-        if abs(v1[i] - v2[i]) > esp:    
+    for i in range(len(v1)):
+        if abs(v1[i] - v2[i]) > esp:
             return False
 
     return True
 
 
 def Xsor(A, b, w):
-    #x(0) = [0,0,.....]
+    # x(0) = [0,0,.....]
     n = len(b)
-    x = [0 for _ in range(n) ]
+    x = [0 for _ in range(n)]
     k = 0
     D, L, U = obtineComponente(A)
-    while not vectoriEgali(inmultesteVector(A,x), b):
+    while not vectoriEgali(inmultesteVector(A, x), b):
         k += 1
         for i in range(n):
-            x[i] = (1 - w) * x[i] + (w / D[i][0]) * ( b[i] - sumOriVal(L[i],x) - sumOriVal(U[i],x))
+            x[i] = (1 - w) * x[i] + (w / D[i][0]) * (b[i] - sumOriVal(L[i], x) - sumOriVal(U[i], x))
 
         if k > 100:
             break
@@ -109,41 +117,29 @@ def Xsor(A, b, w):
 def norma(v1, v2):
     max = 0
     for i in range(len(v1)):
-        if abs(v1[i]-v2[i]) > max:
-            max = abs(v1[i]-v2[i])
+        if abs(v1[i] - v2[i]) > max:
+            max = abs(v1[i] - v2[i])
 
     return max
 
 
-def test(filename):
+def start(filename):
     A, b = citire(filename)
-    
+
     for w in [0.8, 1, 1.2]:
         print("[i] w = {}".format(w))
         x = Xsor(A, b, w)
-        with open(filename[:-4]+'_x_'+str(w)+'.txt','w') as fout:
+        output_file = os.path.join(r'..\Utils\output', os.path.basename(filename)[:-4] + '_x_' + str(w) + '.txt')
+        with open(output_file, 'w') as fout:
             fout.write(str(x))
 
-        print("[i] Norma = {}\n".format(norma(inmultesteVector(A,x), b)))
+        print("[i] Am scris in {}".format(output_file))
+        print("[i] Norma = {}\n".format(norma(inmultesteVector(A, x), b)))
 
 
 if __name__ == '__main__':
-    # test('m_rar_2019_1.txt')
-     test('m_rar_2019_2.txt')
-    # test('m_rar_2019_3.txt')
-    #test('m_rar_2019_4.txt')
-    # test('m_rar_2019_5.txt')
-
-
-
-
-
-
-
-
-
-
-
-
-
-            
+    start(r'..\Utils\input\m_rar_2019_1.txt')
+    # start(r'..\Utils\input\m_rar_2019_2.txt')
+    # start(r'..\Utils\input\m_rar_2019_3.txt')
+    # start(r'..\Utils\input\m_rar_2019_4.txt')
+    # start(r'..\Utils\input\m_rar_2019_5.txt')

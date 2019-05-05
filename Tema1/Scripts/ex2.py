@@ -1,10 +1,10 @@
 import tkinter
 
-from ex1 import get_u
+from Scripts.ex1 import get_u
 
-u = get_u()
-x = 1.0
-y, z = u, u
+__authors__ = ["Mihaila Alexandra Ioana", "Dupu Robert-Daniel"]
+__version__ = "1.1"
+__status__ = "Dev"
 
 
 def plus_asociativ(x, y, z):
@@ -41,7 +41,11 @@ def start_app(punctul_a, punctul_b):
     root.mainloop()
 
 
-if __name__ == '__main__':
+def main():
+    u = get_u()
+    x = 1.0
+    y, z = u, u
+
     punctul_a_adevarat = "a) ({0} + {1}) + {2} == {0} + ({1} + {2}) -> adevarat".format(x, y, z)
     punctul_a_fals = "a) ({0} + {1}) + {2} != {0} + ({1} + {2}) -> fals".format(x, y, z)
     if not plus_asociativ(x, y, z):
@@ -49,7 +53,11 @@ if __name__ == '__main__':
     else:
         punctul_a = punctul_a_adevarat
 
-    punctul_b = "b) ({0} * {1}) * {2} != {0} * ({1} * {2}) -> x = {0}, y = {1}, z = {2}".\
-                format(inmultire_asociativa(x, y, z), y, z)
+    punctul_b = "b) ({0} * {1}) * {2} != {0} * ({1} * {2}) -> x = {0}, y = {1}, z = {2}". \
+        format(inmultire_asociativa(x, y, z), y, z)
 
     start_app(punctul_a, punctul_b)
+
+
+if __name__ == '__main__':
+    main()
